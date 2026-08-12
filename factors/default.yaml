@@ -1,0 +1,93 @@
+# Default factor set for v0.1.
+#
+# Read this before trusting any number the engine prints.
+#
+# Only `co2_per_carbon` is sourced, because it is a physical constant rather
+# than a methodology choice. Everything else here is a PLACEHOLDER: the values
+# are plausible working numbers chosen so the calculation has a testable shape,
+# and they carry `source: null` on purpose. The engine marks every step that
+# applies an unsourced factor as provisional, and the dossier repeats that
+# warning, so an unsourced factor cannot quietly end up behind a headline
+# figure.
+#
+# Replacing these with figures taken from the selected methodology — with the
+# document reference, its version and its publication date filled in — is the
+# next substantive change to this repository, not a formality.
+
+version: "0.1.0-placeholder"
+
+factors:
+  - name: co2_per_carbon
+    value: 3.664
+    unit: t CO2 / t C
+    source:
+      kind: physical_constant
+      reference: molar mass ratio CO2 / C = 44.009 / 12.011
+    note: stoichiometric, not a methodology parameter
+
+  - name: biochar_yield_dry_basis
+    key: cotton_stalk
+    value: 0.28
+    unit: t biochar / t dry biomass
+    source: null
+    note: PLACEHOLDER — only used when no measured biochar mass is recorded
+
+  - name: durable_fraction
+    key: h_corg_below_0_4
+    value: 0.74
+    unit: fraction
+    source: null
+    note: PLACEHOLDER — band thresholds and value both pending methodology text
+
+  - name: durable_fraction
+    key: h_corg_0_4_to_0_7
+    value: 0.50
+    unit: fraction
+    source: null
+    note: PLACEHOLDER
+
+  - name: durable_fraction
+    key: h_corg_above_0_7
+    value: 0.0
+    unit: fraction
+    source: null
+    note: >
+      PLACEHOLDER — a high H/Corg ratio indicates the carbon is not condensed
+      enough to be treated as durable. Whether it is zero or merely small is a
+      methodology question, not an engineering one.
+
+  - name: transport_emission_factor
+    value: 0.00012
+    unit: t CO2e / (t * km)
+    source: null
+    note: PLACEHOLDER — generic road freight, applied when the mode is unlisted
+
+  - name: transport_emission_factor
+    key: truck_diesel_rigid_7t
+    value: 0.00014
+    unit: t CO2e / (t * km)
+    source: null
+    note: PLACEHOLDER
+
+  - name: grid_electricity_emission_factor
+    value: 0.00048
+    unit: t CO2e / kWh
+    source: null
+    note: >
+      PLACEHOLDER — a single global value. Per-country grid factors are a
+      roadmap item; until then the trace shows this generic one was applied.
+
+  - name: fuel_emission_factor
+    key: diesel
+    value: 0.00268
+    unit: t CO2e / l
+    source: null
+    note: PLACEHOLDER
+
+  - name: uncertainty_deduction_fraction
+    value: 0.05
+    unit: fraction
+    source: null
+    note: >
+      PLACEHOLDER — a flat conservative deduction standing in for a proper
+      uncertainty propagation over the measurements that fed the calculation.
