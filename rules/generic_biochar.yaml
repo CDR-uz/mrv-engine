@@ -1,0 +1,186 @@
+# Generic biochar CDR rule pack — reference only.
+#
+# This pack is NOT a methodology and does not claim conformity with one. It
+# encodes the questions common to biochar carbon removal project development,
+# so that the engine has something to run and its behaviour is testable.
+#
+# Standard-specific packs (Verra VM0044, Puro) are deliberately absent from
+# v0.1. VM0044 entered a major revision on 15 July 2026, and shipping a file
+# named after a methodology under revision would assert a conformity that does
+# not exist. When those packs are added they will carry the document reference,
+# its version and its date in this header.
+
+name: generic_biochar
+version: "0.1.0"
+description: Common eligibility questions for biochar carbon removal projects.
+
+eligibility_rules:
+  - id: purpose_grown_biomass
+    title: Biomass appears to be purpose-grown
+    severity: blocking
+    when:
+      field: feedstock.purpose_grown
+      is: true
+    message: >
+      Biomass cultivated for the project is not a residue. It raises land-use
+      change and additionality questions that a waste-biomass pathway does not
+      answer, and no biochar CDR methodology accepts it on residue terms.
+
+  - id: not_declared_as_residue
+    title: Feedstock is not declared as a residue
+    severity: blocking
+    when:
+      field: feedstock.is_residue
+      is: false
+    message: >
+      The pathway assumes waste or residue biomass. A feedstock explicitly
+      declared as something else needs a different methodology.
+
+  - id: residue_status_unknown
+    title: Residue status not recorded
+    severity: review
+    when:
+      field: feedstock.is_residue
+      is_missing: true
+    message: >
+      Whether the biomass is a residue determines which methodology can apply
+      at all. It has to be established before any other assessment is worth
+      doing.
+
+  - id: baseline_is_productive_use
+    title: Biomass currently has a productive use
+    severity: review
+    when:
+      field: feedstock.baseline_fate
+      in: [animal_feed, energy_recovery, other_productive_use]
+    message: >
+      Biomass already serving a purpose raises additionality and leakage
+      questions: diverting it may simply move the emissions elsewhere. This
+      needs a documented baseline, not an assertion.
+
+  - id: baseline_unknown
+    title: Baseline fate of the biomass is unknown
+    severity: review
+    when:
+      field: feedstock.baseline_fate
+      is: unknown
+    message: >
+      What would have happened to the biomass without the project sets the
+      baseline emissions and underpins additionality. Recorded as unknown, it
+      cannot support any quantification.
+
+  - id: competing_uses_declared
+    title: Competing uses declared for this feedstock
+    severity: review
+    when:
+      field: feedstock.competing_uses
+      contains_any:
+        - household_fuel
+        - animal_feed
+        - animal_bedding
+        - construction
+        - pulp_and_paper
+    message: >
+      A declared competing use means the biomass has market value and
+      alternative buyers. Both the additionality case and the supply security
+      of the project need to account for it.
+
+  - id: non_durable_end_use
+    title: Biochar end use does not store the carbon
+    severity: blocking
+    when:
+      field: end_use.application_type
+      in: [combustion, energy, incineration]
+    message: >
+      Burning the biochar returns the carbon to the atmosphere. There is no
+      removal to quantify regardless of how the biochar was produced.
+
+  - id: end_use_not_recorded
+    title: End use of the biochar not recorded
+    severity: review
+    when:
+      field: end_use.application_type
+      is_missing: true
+    message: >
+      Where the biochar ends up determines whether the storage is durable, and
+      it is the claim an auditor will want located on a map.
+
+  - id: h_corg_above_durability_threshold
+    title: H/Corg ratio indicates the carbon is not durable
+    severity: blocking
+    when:
+      field: lab.hydrogen_to_organic_carbon_molar_ratio
+      gt: 0.7
+    message: >
+      A high hydrogen to organic carbon ratio means the material is not
+      condensed enough to be treated as durable storage. The threshold applied
+      here is a placeholder pending the methodology text.
+
+  - id: laboratory_characterisation_absent
+    title: No laboratory characterisation of the biochar
+    severity: review
+    when:
+      field: lab.organic_carbon_fraction
+      is_missing: true
+    message: >
+      Without carbon content from an accredited laboratory there is no
+      defensible quantity, only an estimate from a yield assumption.
+
+  - id: high_moisture_feedstock
+    title: Feedstock moisture is high
+    severity: review
+    when:
+      field: mass.moisture_fraction
+      gt: 0.35
+    message: >
+      Wet feedstock costs energy to dry, which lowers net removal and may make
+      the batch uneconomic before it makes it ineligible.
+
+evidence_checklist:
+  - kind: feedstock_origin
+    label: Documented origin of the biomass
+    blocking: true
+    weight: 2
+
+  - kind: biomass_ownership
+    label: Evidence that the supplier owned the biomass
+    blocking: true
+    weight: 2
+
+  - kind: carbon_rights_assignment
+    label: Signed assignment of carbon rights to the project
+    blocking: true
+    weight: 3
+
+  - kind: baseline_documentation
+    label: Documented baseline fate of the biomass
+    blocking: true
+    weight: 2
+
+  - kind: mass_record
+    label: Weighbridge or equivalent mass record
+    blocking: true
+    weight: 1
+
+  - kind: moisture_measurement
+    label: Moisture measurement at intake
+    weight: 1
+
+  - kind: transport_record
+    label: Transport records establishing chain of custody
+    weight: 1
+
+  - kind: pyrolysis_log
+    label: Process log for the production run
+    blocking: true
+    weight: 2
+
+  - kind: laboratory_report
+    label: Accredited laboratory report for the biochar
+    blocking: true
+    weight: 3
+
+  - kind: end_use_coordinates
+    label: Location where the biochar was applied
+    blocking: true
+    weight: 2
