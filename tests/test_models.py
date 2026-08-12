@@ -3,8 +3,8 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from cacarbon_mrv.adapters.io import load_batch
-from cacarbon_mrv.core.models import BaselineFate, Batch, EvidenceStatus, MassRecord
+from mrv_engine.adapters.io import load_batch
+from mrv_engine.core.models import BaselineFate, Batch, EvidenceStatus, MassRecord
 
 EXAMPLE = Path(__file__).parent.parent / "examples" / "cotton-stalk-samarkand.yaml"
 

@@ -9,7 +9,7 @@ from pathlib import Path
 
 import yaml
 
-from cacarbon_mrv.core.models import Batch
+from mrv_engine.core.models import Batch
 
 
 def load_batch(path: str | Path) -> Batch:

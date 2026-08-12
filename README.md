@@ -1,4 +1,4 @@
-# CaCarbon MRV Pre-Assessment Engine
+# MRV Pre-Assessment Engine
 
 **Status: v0.1 · pre-alpha · under active development**
 
@@ -20,7 +20,7 @@ adapters over the same functions.
 ## Layout
 
 ```
-src/cacarbon_mrv/
+src/mrv_engine/
 ├── core/       pure functions, no I/O
 ├── adapters/   CLI and (later) HTTP
 rules/          methodology rule packs, versioned, as data
