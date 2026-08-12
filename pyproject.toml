@@ -10,6 +10,9 @@ dependencies = [
     "pyyaml>=6.0",
 ]
 
+[project.scripts]
+mrv-engine = "mrv_engine.adapters.cli:main"
+
 [dependency-groups]
 dev = [
     "pytest>=8.0",
