@@ -1,0 +1,81 @@
+# Demonstration batch — cotton stalks, Zarafshan valley, Samarkand region.
+#
+# The numbers are plausible working values for a demonstration project, not
+# measurements from a real production run. Fields that a real batch would only
+# get from a laboratory or a site visit are left out where they are genuinely
+# unknown, so that the gap register has something true to report.
+
+batch_id: CAC-UZ-SAM-COT-2026-00001
+
+feedstock:
+  feedstock_type: cotton_stalk
+  region: Samarkand / Zarafshan valley
+  supplier_id: SUP-UZ-0007
+  is_residue: true
+  purpose_grown: false
+  baseline_fate: burned_in_field
+  competing_uses:
+    - household_fuel
+  collection_date: 2026-03-14
+  collection_site:
+    latitude: 39.6542
+    longitude: 66.9597
+
+mass:
+  wet_mass_kg: 10000
+  moisture_fraction: 0.18
+
+transport:
+  - distance_km: 75
+    mode: truck_diesel_rigid_7t
+    payload_mass_kg: 10000
+
+pyrolysis:
+  facility_id: PYR-UZ-0002
+  technology: continuous_screw_reactor
+  peak_temperature_c: 550
+  residence_time_min: 25
+  biochar_mass_kg: 2296
+  electricity_kwh: 310
+  run_date: 2026-03-19
+
+lab:
+  laboratory_id: LAB-UZ-0001
+  sample_date: 2026-03-24
+  organic_carbon_fraction: 0.72
+  # H/Corg is missing on purpose: without it the durability of the stored
+  # carbon cannot be defended, and the engine should say so.
+
+end_use:
+  application_type: agricultural_soil
+  application_date: 2026-04-02
+
+evidence:
+  - kind: feedstock_origin
+    status: present
+    document_reference: DOC-2026-0031
+  - kind: biomass_ownership
+    status: present
+    document_reference: DOC-2026-0032
+  - kind: baseline_documentation
+    status: partial
+    note: supplier statement only, no third-party record of field burning
+  - kind: mass_record
+    status: present
+    document_reference: DOC-2026-0035
+  - kind: moisture_measurement
+    status: present
+    document_reference: DOC-2026-0035
+  - kind: transport_record
+    status: present
+    document_reference: DOC-2026-0041
+  - kind: pyrolysis_log
+    status: missing
+  - kind: laboratory_report
+    status: missing
+    note: sample submitted, report not yet received
+  - kind: end_use_coordinates
+    status: missing
+  - kind: carbon_rights_assignment
+    status: partial
+    note: draft agreement with supplier, unsigned
