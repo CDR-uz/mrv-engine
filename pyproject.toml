@@ -25,5 +25,12 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/mrv_engine"]
 
+# The shipped packs live at the repository root, where they are the first thing
+# a reader finds. They also have to reach an installed wheel, so they are
+# copied into the package; `io._shipped` prefers the checkout when there is one.
+[tool.hatch.build.targets.wheel.force-include]
+"rules" = "mrv_engine/_packs/rules"
+"factors" = "mrv_engine/_packs/factors"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]

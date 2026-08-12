@@ -3,10 +3,16 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from mrv_engine.adapters.io import load_batch
+from mrv_engine.adapters.io import DEFAULT_FACTORS, DEFAULT_RULES, load_batch
 from mrv_engine.core.models import BaselineFate, Batch, EvidenceStatus, MassRecord
 
 EXAMPLE = Path(__file__).parent.parent / "examples" / "cotton-stalk-samarkand.yaml"
+
+
+def test_shipped_packs_resolve_to_real_files():
+    """Guards the wheel: the packs live at the repo root and are copied into it."""
+    assert DEFAULT_RULES.is_file()
+    assert DEFAULT_FACTORS.is_file()
 
 
 def test_example_batch_loads():

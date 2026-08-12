@@ -5,6 +5,7 @@ Kept out of `core` deliberately: the core takes a `Batch`, never a path.
 
 from __future__ import annotations
 
+from importlib import resources
 from pathlib import Path
 
 import yaml
@@ -13,9 +14,22 @@ from mrv_engine.core.factors import FactorSet
 from mrv_engine.core.models import Batch
 from mrv_engine.core.rules import RulePack
 
-_ROOT = Path(__file__).resolve().parents[3]
-DEFAULT_FACTORS = _ROOT / "factors" / "default.yaml"
-DEFAULT_RULES = _ROOT / "rules" / "generic_biochar.yaml"
+def _shipped(directory: str, name: str) -> Path:
+    """Locate a pack that ships with the engine.
+
+    In a source checkout the packs sit at the repository root, which is where a
+    reader looks for them. In an installed wheel the same files are copied under
+    the package. Preferring the checkout means editing a pack in a working tree
+    takes effect without reinstalling.
+    """
+    checkout = Path(__file__).resolve().parents[3] / directory / name
+    if checkout.is_file():
+        return checkout
+    return Path(str(resources.files("mrv_engine") / "_packs" / directory / name))
+
+
+DEFAULT_FACTORS = _shipped("factors", "default.yaml")
+DEFAULT_RULES = _shipped("rules", "generic_biochar.yaml")
 
 
 def load_batch(path: str | Path) -> Batch:
