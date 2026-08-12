@@ -5,10 +5,17 @@
 # so that the engine has something to run and its behaviour is testable.
 #
 # Standard-specific packs (Verra VM0044, Puro) are deliberately absent from
-# v0.1. VM0044 entered a major revision on 15 July 2026, and shipping a file
-# named after a methodology under revision would assert a conformity that does
-# not exist. When those packs are added they will carry the document reference,
-# its version and its date in this header.
+# v0.1, and VM0044 is the clearest illustration of why.
+#
+# Its current published version is v1.2, active since 27 June 2025. A major
+# revision (methodology development ID #M0226) is under public consultation
+# from 15 July to 17 August 2026 and would be published as v2.0:
+#   https://verra.org/consultation-major-revision-to-biochar-methodology-vm0044/
+#
+# Shipping a file named after a methodology whose successor version is still
+# open for comment would assert a conformity that does not exist. When those
+# packs are added they will carry the document reference, its version and its
+# date in this header.
 
 name: generic_biochar
 version: "0.1.0"
