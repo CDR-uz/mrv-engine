@@ -19,7 +19,13 @@ What v0.1 deliberately does not do, roughly in the order it matters.
 ## Rule packs
 
 - [ ] A pack aligned to a named methodology, carrying the document reference
-      and version in its header. Not attempted while VM0044 is under revision.
+      and version in its header. Deliberately not attempted yet: VM0044 v1.2
+      has been active since 27 June 2025, but a major revision (#M0226) is
+      under [public consultation](https://verra.org/consultation-major-revision-to-biochar-methodology-vm0044/)
+      from 15 July to 17 August 2026 and will be published as **v2.0** — a new
+      version rather than an amendment. A pack written against v1.2 today would
+      be obsolete within months, so the trigger for this item is v2.0 being
+      published, not the consultation closing.
 - [ ] Aggregate conditions. The condition language addresses single fields by
       dotted path; rules like "total transport distance over 200 km" or "any
       leg missing a date" cannot currently be expressed.
