@@ -27,6 +27,7 @@ mass:
 
 transport:
   - distance_km: 75
+    departure_date: 2026-03-16
     mode: truck_diesel_rigid_7t
     payload_mass_kg: 10000
 

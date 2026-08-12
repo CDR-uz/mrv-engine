@@ -78,6 +78,7 @@ class TransportLeg(_Model):
     distance_km: float = Field(ge=0)
     mode: str
     payload_mass_kg: float | None = Field(default=None, gt=0)
+    departure_date: date | None = None
 
 
 class FuelUse(_Model):
